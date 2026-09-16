@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn English Free — Podcasts &amp; Notes Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A4A;
+    --ink-soft:#3B4A6B;
+    --paper:#FAF6EE;
+    --paper-raised:#F1EADA;
+    --gold:#C1892F;
+    --gold-soft:#EBD6AC;
+    --teal:#3E7C7C;
+    --teal-soft:#DCEAE8;
+    --line:#D9CFB8;
+    --text:#232323;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.serif{font-family:'Lora',Georgia,serif;}
+  .wrap{max-width:920px;margin:0 auto;padding:48px 24px 96px;}
+
+  /* HERO */
+  .hero{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:32px;
+    align-items:end;
+    padding-bottom:36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:40px;
+  }
+  .hero h1{
+    font-size:clamp(2rem,4.5vw,2.9rem);
+    font-weight:600;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.12;
+  }
+  .hero p{margin:0;color:var(--ink-soft);font-size:1.05rem;max-width:46ch;}
+  .hero-stat{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:4px;
+    padding:20px 22px;
+    justify-self:end;
+    width:100%;
+    max-width:230px;
+  }
+  .hero-stat .num{font-family:'Lora',serif;font-size:2.1rem;font-weight:600;display:block;color:var(--gold-soft);}
+  .hero-stat .lab{font-size:.85rem;color:#DCE1EC;}
+  @media (max-width:640px){.hero{grid-template-columns:1fr;}.hero-stat{justify-self:start;max-width:none;}}
+
+  /* TABS */
+  .tabs{display:flex;gap:6px;margin-bottom:32px;border-bottom:1px solid var(--line);}
+  .tab-btn{
+    font-family:'Inter',sans-serif;
+    font-size:.95rem;
+    font-weight:600;
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    padding:10px 4px;
+    margin-right:22px;
+    cursor:pointer;
+    position:relative;
+    top:1px;
+  }
+  .tab-btn.active{color:var(--ink);}
+  .tab-btn.active::after{
+    content:'';
+    position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--gold);
+  }
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  /* ROADMAP */
+  .roadmap-svg{display:block;width:100%;height:auto;margin-bottom:8px;}
+  .steps{display:flex;flex-direction:column;gap:0;}
+  .step{
+    display:grid;
+    grid-template-columns:52px 1fr;
+    gap:18px;
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+    cursor:pointer;
+  }
+  .step:last-child{border-bottom:none;}
+  .step-num{
+    font-family:'Lora',serif;
+    font-size:1.3rem;
+    color:var(--gold);
+    font-weight:600;
+    padding-top:2px;
+  }
+  .step-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+  .step-title{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;color:var(--ink);}
+  .step-when{font-size:.8rem;color:var(--teal);white-space:nowrap;font-weight:600;}
+  .step-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .28s ease;
+    font-size:.95rem;
+    color:var(--ink-soft);
+  }
+  .step-body-in{padding-top:10px;}
+  .step.open .step-body{max-height:220px;}
+  .chevron{display:inline-block;transition:transform .2s ease;color:var(--gold);margin-left:6px;}
+  .step.open .chevron{transform:rotate(90deg);}
+
+  /* RESOURCES */
+  .level-group{margin-bottom:34px;}
+  .level-title{
+    font-size:.8rem;
+    font-weight:700;
+    color:var(--teal);
+    letter-spacing:.02em;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .level-title::after{content:'';flex:1;height:1px;background:var(--line);}
+  .card{
+    background:var(--paper-raised);
+    border-radius:6px;
+    padding:16px 18px;
+    margin-bottom:10px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:12px;
+    align-items:start;
+  }
+  .card h3{font-size:1.02rem;margin:0 0 4px;color:var(--ink);}
+  .card p{margin:0;font-size:.88rem;color:var(--ink-soft);}
+  .card .tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{font-size:.72rem;background:var(--teal-soft);color:var(--teal);padding:3px 8px;border-radius:3px;font-weight:600;}
+  .card a.go{
+    align-self:center;
+    font-size:.82rem;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--gold-soft);
+    padding:8px 14px;
+    border-radius:4px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .card a.go:hover{background:var(--gold);color:#fff;}
+
+  /* TRACKER */
+  .progress-shell{
+    background:var(--paper-raised);
+    border-radius:6px;
+    padding:6px;
+    margin-bottom:24px;
+  }
+  .progress-bar{height:10px;border-radius:4px;background:var(--gold);width:0%;transition:width .3s ease;}
+  .progress-label{font-size:.85rem;color:var(--ink-soft);margin-bottom:20px;}
+  .check-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .check-row input{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;}
+  .check-row label{font-size:.95rem;color:var(--text);cursor:pointer;}
+  .check-row.done label{color:var(--ink-soft);text-decoration:line-through;}
+
+  footer{margin-top:50px;font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <h1>Learn English, one episode at a time.</h1>
+      <p>A free self-study path built around podcasts, transcripts, and notes — no paid app required. Follow the roadmap weekly, pick resources for your level, and track your progress.</p>
+    </div>
+    <div class="hero-stat">
+      <span class="num">7 steps</span>
+      <span class="lab">a repeatable weekly loop, listen → read → speak → review</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="roadmap">Roadmap</button>
+    <button class="tab-btn" data-tab="resources">Free resources</button>
+    <button class="tab-btn" data-tab="tracker">Weekly tracker</button>
+  </div>
+
+  <!-- ROADMAP PANEL -->
+  <div class="panel active" id="roadmap">
+
+    <svg class="roadmap-svg" viewBox="0 0 860 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="75" x2="820" y2="75" stroke="#D9CFB8" stroke-width="2"/>
+      <g id="nodes"></g>
+    </svg>
+
+    <div class="steps" id="stepsList"></div>
+  </div>
+
+  <!-- RESOURCES PANEL -->
+  <div class="panel" id="resources">
+
+    <div class="level-group">
+      <div class="level-title">BEGINNER · A1–A2</div>
+
+      <div class="card">
+        <div>
+          <h3>BBC Learning English — 6 Minute English</h3>
+          <p>Short weekly episodes on everyday topics. Every episode has a full transcript, a vocabulary box with definitions, and a downloadable worksheet.</p>
+          <div class="tags"><span class="tag">Podcast</span><span class="tag">Transcript</span><span class="tag">Vocab notes</span></div>
+        </div>
+        <a class="go" href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>VOA Learning English</h3>
+          <p>News and stories narrated at a slower pace. Every program is published with a full transcript and a simplified-vocabulary list.</p>
+          <div class="tags"><span class="tag">Podcast</span><span class="tag">Slow audio</span><span class="tag">Transcript</span></div>
+        </div>
+        <a class="go" href="https://learningenglish.voanews.com/" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>British Council — LearnEnglish Podcasts</h3>
+          <p>Discussion-based episodes for A1–B1 learners. Comes with a "support pack" of transcripts, exercises, and short quizzes per episode.</p>
+          <div class="tags"><span class="tag">Podcast</span><span class="tag">Exercises</span><span class="tag">Quiz</span></div>
+        </div>
+        <a class="go" href="https://learnenglish.britishcouncil.org/podcasts" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+    </div>
+
+    <div class="level-group">
+      <div class="level-title">INTERMEDIATE · B1–B2</div>
+
+      <div class="card">
+        <div>
+          <h3>ELLLO (English Listening Lesson Library)</h3>
+          <p>Thousands of short listening clips from real speakers worldwide, each with a transcript and comprehension questions, sorted by difficulty.</p>
+          <div class="tags"><span class="tag">Listening lab</span><span class="tag">Transcript</span><span class="tag">Levels</span></div>
+        </div>
+        <a class="go" href="https://elllo.org/" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Randall's ESL Cyber Listening Lab</h3>
+          <p>Classic free listening archive organised by level, each with pre-, while-, and post-listening comprehension exercises and scripts.</p>
+          <div class="tags"><span class="tag">Listening</span><span class="tag">Script</span><span class="tag">Exercises</span></div>
+        </div>
+        <a class="go" href="https://www.esl-lab.com/" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Espresso English</h3>
+          <p>Short, practical everyday-English lessons with free audio and written notes — grammar, phrasal verbs, and business English.</p>
+          <div class="tags"><span class="tag">Podcast</span><span class="tag">Lesson notes</span></div>
+        </div>
+        <a class="go" href="https://www.espressoenglish.net/" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+    </div>
+
+    <div class="level-group">
+      <div class="level-title">ADVANCED · C1–C2</div>
+
+      <div class="card">
+        <div>
+          <h3>TED Talks + TED transcripts</h3>
+          <p>Natural, native-speed speech on any topic you like. Every talk has an interactive transcript synced to the video, with translations.</p>
+          <div class="tags"><span class="tag">Video/audio</span><span class="tag">Synced transcript</span></div>
+        </div>
+        <a class="go" href="https://www.ted.com/talks" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>BBC News — with subtitles</h3>
+          <p>Real, unscripted news coverage at full speed, with subtitles available for close reading practice.</p>
+          <div class="tags"><span class="tag">News</span><span class="tag">Subtitles</span></div>
+        </div>
+        <a class="go" href="https://www.bbc.com/news" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h3>Scientific American Podcasts</h3>
+          <p>Native-speed science journalism with full transcripts — good for advanced vocabulary and formal/academic register.</p>
+          <div class="tags"><span class="tag">Podcast</span><span class="tag">Transcript</span></div>
+        </div>
+        <a class="go" href="https://www.scientificamerican.com/podcasts/" target="_blank" rel="noopener">Visit ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRACKER PANEL -->
+  <div class="panel" id="tracker">
+    <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-label" id="progressLabel">0 of 7 done this week</div>
+    <div id="checklist"></div>
+  </div>
+
+  <footer>Built as a self-study reference. Resource links go to each provider's official site — verify availability, as content changes over time.</footer>
+</div>
+
+<script>
+const steps = [
+  {t:"Find your level", when:"Day 1", d:"Take a free placement check (British Council or Cambridge) or just try one Beginner and one Intermediate clip from the Resources tab — whichever you understand ~70% of without help is your starting level."},
+  {t:"Pick one source, not five", when:"Day 1", d:"Choose a single podcast that matches your level from the Resources tab. Stick with it for at least 2 weeks so its host voices and pacing become familiar."},
+  {t:"Listen once, cold", when:"Day 2", d:"Play a 5–10 minute episode without the transcript. Don't pause. Just try to catch the general topic and a few key words — this trains real listening, not reading."},
+  {t:"Read the transcript, then re-listen", when:"Day 2", d:"Open the transcript. Read while listening a second time, following word-by-word where audio and text meet. Circle every phrase you didn't catch by ear."},
+  {t:"Build a notes page", when:"Day 3", d:"From the transcript, write 8–10 new words or phrases with the sentence they appeared in and a short definition. Keep one running notebook or note-app page per source."},
+  {t:"Shadow out loud", when:"Day 4", d:"Play the audio again and speak along a half-second behind the speaker, copying rhythm and stress — not just the words. 5 minutes is enough. This is what actually improves speaking."},
+  {t:"Review before the next episode", when:"Day 6–7", d:"Skim last week's notes page for 5 minutes and quiz yourself on the words. Then start the loop again with a new episode from the same source."}
+];
+
+const nodesG = document.getElementById('nodes');
+const n = steps.length;
+for(let i=0;i<n;i++){
+  const x = 40 + (780/(n-1))*i;
+  const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.setAttribute("cx",x); c.setAttribute("cy",75); c.setAttribute("r",16);
+  c.setAttribute("fill", i===0 ? "#C1892F" : "#FAF6EE");
+  c.setAttribute("stroke","#C1892F"); c.setAttribute("stroke-width","2");
+  nodesG.appendChild(c);
+  const tx = document.createElementNS("http://www.w3.org/2000/svg","text");
+  tx.setAttribute("x",x); tx.setAttribute("y",80); tx.setAttribute("text-anchor","middle");
+  tx.setAttribute("font-family","Lora, serif"); tx.setAttribute("font-size","14"); tx.setAttribute("font-weight","600");
+  tx.setAttribute("fill", i===0 ? "#FAF6EE" : "#C1892F");
+  tx.textContent = i+1;
+  nodesG.appendChild(tx);
+  const lab = document.createElementNS("http://www.w3.org/2000/svg","text");
+  lab.setAttribute("x",x); lab.setAttribute("y", i%2===0 ? 108 : 40); lab.setAttribute("text-anchor","middle");
+  lab.setAttribute("font-family","Inter, sans-serif"); lab.setAttribute("font-size","11"); lab.setAttribute("fill","#3B4A6B");
+  lab.textContent = steps[i].t.length>16 ? steps[i].t.slice(0,15)+"…" : steps[i].t;
+  nodesG.appendChild(lab);
+}
+
+const stepsList = document.getElementById('stepsList');
+steps.forEach((s,i)=>{
+  const row = document.createElement('div');
+  row.className='step';
+  row.innerHTML = `
+    <div class="step-num">${String(i+1).padStart(2,'0')}</div>
+    <div>
+      <div class="step-head">
+        <span class="step-title">${s.t}<span class="chevron">›</span></span>
+        <span class="step-when">${s.when}</span>
+      </div>
+      <div class="step-body"><div class="step-body-in">${s.d}</div></div>
+    </div>`;
+  row.addEventListener('click', ()=> row.classList.toggle('open'));
+  stepsList.appendChild(row);
+});
+stepsList.firstChild.classList.add('open');
+
+// tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// tracker
+const checklist = document.getElementById('checklist');
+const progressBar = document.getElementById('progressBar');
+const progressLabel = document.getElementById('progressLabel');
+function updateProgress(){
+  const boxes = checklist.querySelectorAll('input');
+  const doneCount = [...boxes].filter(b=>b.checked).length;
+  progressBar.style.width = (doneCount/boxes.length*100)+'%';
+  progressLabel.textContent = doneCount+' of '+boxes.length+' done this week';
+}
+steps.forEach((s,i)=>{
+  const row = document.createElement('div');
+  row.className='check-row';
+  row.innerHTML = `<input type="checkbox" id="c${i}"><label for="c${i}">${s.t}</label>`;
+  const box = row.querySelector('input');
+  box.addEventListener('change', ()=>{
+    row.classList.toggle('done', box.checked);
+    updateProgress();
+  });
+  checklist.appendChild(row);
+});
+updateProgress();
+</script>
+</body>
+</html>
